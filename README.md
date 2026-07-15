@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # EGM2008 Geoid Model - Peru
 
 Desktop application developed in Python to implement the EGM2008 geoid model for Peru.
