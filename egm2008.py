@@ -11,6 +11,7 @@ class EGModel2008: # CLASE QUE CARGA EL MODELO GEOIDAL
 
 
     def load_model(self): # CARGA LA GRILLA DESDE EL XLSX Y CONSTRUYE INDICES POR FILA Y COLUMNA
+
         path = Path(__file__).parent / "data" / "cuadro_vertices_grilla_EGM2008_Peruaa.xlsx"
         df = pd.read_excel(path, sheet_name="Vertices_Grilla")
         self.vertices = df.set_index(["Fila", "Columna"])
@@ -36,6 +37,23 @@ class EGModel2008: # CLASE QUE CARGA EL MODELO GEOIDAL
         ND = self.vertices.loc[(j+1, i)]
 
         return NA, NB, NC, ND
+    
+    def calculate_tu(self, latitude, longitude, NA, NB, ND):
+
+        lambda0 = NA["Longitud"]
+        lambda1 = NB["Longitud"]
+
+        t = (longitude - lambda0) / (lambda1 - lambda0)
+
+        phi0 = NA["Latitud"]
+        phi1 = ND["Latitud"]
+
+        u = (latitude - phi0) / (phi1 - phi0)
+
+        return t, u
+
+
+
 
 
     
