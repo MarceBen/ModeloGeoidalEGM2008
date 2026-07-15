@@ -6,9 +6,29 @@ model = EGModel2008()
 model.load_model()
 
 # Ingreso de datos por el usuario
-latitude = float(input("Ingrese la latitud: "))
-longitude = float(input("Ingrese la longitud: "))
-h = float(input("Ingrese la altura elipsoidal: "))
+try:
+    latitude = float(input("Ingrese la latitud: "))
+except:
+    print("La latitud debe ser un valor numérico.")
+
+try:
+    longitude = float(input("Ingrese la longitud: "))
+except:
+    print("La longitud debe ser un valor numérico.")
+
+try:
+    h = float(input("Ingrese la altura elipsoidal: "))
+except:
+    print("La altura elipsoidal debe ser un valor numérico.")
+
+if(latitude < -20 and latitude > 2):
+    print("El valor ingresado no comprende los limites del modelo. ")
+    exit()
+
+if(longitude < -83 and longitude > -66):
+    print("El valor ingresado no comprende los limites del modelo. ")
+    exit()
+
 
 # Calculo de los indices donde se encuentra el punto (en decimales y truncdos)
 i, j, i_trunc, j_trunc = model.calculate_indices(latitude, longitude)
