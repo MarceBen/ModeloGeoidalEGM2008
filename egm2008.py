@@ -9,6 +9,14 @@ class EGModel2008:
         self.delta = 0.0416666667
 
     def load_model(self):
-        pass
+        path = Path(__file__).parent / "data" / "cuadro_vertices_grilla_EGM2008_Peruaa.xlsx"
+        df = pd.read_excel(path, sheet_name="Vertices_Grilla")
+        self.vertices = df
+
+        print(f"Modelo cargado: {len(self.vertices)} vértices.")
+
+
+
+        
 
 
