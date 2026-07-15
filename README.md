@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # EGM2008 Geoid Model - Peru
 
 Desktop application developed in Python to implement the EGM2008 geoid model for Peru.
@@ -43,3 +44,7 @@ Work in progress... XD
 
 Marcelo Benites
 Software Engineering Student
+=======
+# ModeloGeoidalEGM2008
+Desktop application for geoid height interpolation using the EGM2008 model for Peru.
+>>>>>>> a455a60 (Initial commit)
