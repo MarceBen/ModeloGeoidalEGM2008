@@ -12,11 +12,17 @@ class EGModel2008: # CLASE QUE CARGA EL MODELO GEOIDAL
 
     def load_model(self): # CARGA LA GRILLA DESDE EL XLSX Y CONSTRUYE INDICES POR FILA Y COLUMNA
 
-        path = Path(__file__).parent / "data" / "cuadro_vertices_grilla_EGM2008_Peruaa.xlsx"
-        df = pd.read_excel(path, sheet_name="Vertices_Grilla")
-        self.vertices = df.set_index(["Fila", "Columna"])
 
-        print(f"Modelo cargado: {len(self.vertices)} vértices.")
+        try:
+            path = Path(__file__).parent / "data" / "cuadro_vertices_grilla_EGM2008_Peruaa.xlsx"
+            df = pd.read_excel(path, sheet_name="Vertices_Grilla")
+            self.vertices = df.set_index(["Fila", "Columna"])
+
+            print(f"Modelo cargado: {len(self.vertices)} vértices.")
+
+        except FileNotFoundError:
+            raise FileNotFoundError("El archivo del modelo no fue encontrado.")
+
 
     
     def calculate_indices(self, latitude, longitude): # CALCULA EL INDICE I Y J DE UNA LATITUD Y LONGITUD
@@ -30,11 +36,15 @@ class EGModel2008: # CLASE QUE CARGA EL MODELO GEOIDAL
         return i, j, i_trunc, j_trunc
     
     def get_vertices(self, i, j):
+        
+        try:
+            NA = self.vertices.loc[(j, i)]
+            NB = self.vertices.loc[(j, i+1)]
+            NC = self.vertices.loc[(j+1, i+1)]
+            ND = self.vertices.loc[(j+1, i)]
+        except KeyError:
+            raise ValueError("El punto se encuentra fuera de los limites del modelo")
 
-        NA = self.vertices.loc[(j, i)]
-        NB = self.vertices.loc[(j, i+1)]
-        NC = self.vertices.loc[(j+1, i+1)]
-        ND = self.vertices.loc[(j+1, i)]
 
         return NA, NB, NC, ND
     
