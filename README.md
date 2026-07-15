@@ -1,6 +1,6 @@
 # EGM2008 Geoid Model - Peru
 
-Desktop application developed in Python to simulate the EGM2008 geoid model for Peru.
+Desktop application developed in Python to implement the EGM2008 geoid model for Peru.
 
 The application computes geoid undulation (N) and orthometric height (H) from geodetic coordinates using bilinear interpolation over the official EGM2008 Peru grid.
 
