@@ -40,13 +40,13 @@ class EGModel2008: # CLASE QUE CARGA EL MODELO GEOIDAL
     
     def calculate_tu(self, latitude, longitude, NA, NB, ND):
 
-        lambda0 = NA["Longitud"]
-        lambda1 = NB["Longitud"]
+        lambda0 = NA["Longitud_deg"]
+        lambda1 = NB["Longitud_deg"]
 
         t = (longitude - lambda0) / (lambda1 - lambda0)
 
-        phi0 = NA["Latitud"]
-        phi1 = ND["Latitud"]
+        phi0 = NA["Latitud_deg"]
+        phi1 = ND["Latitud_deg"]
 
         u = (latitude - phi0) / (phi1 - phi0)
 
