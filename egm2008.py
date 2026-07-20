@@ -18,7 +18,7 @@ class EGModel2008: # CLASE QUE CARGA EL MODELO GEOIDAL
             df = pd.read_excel(path, sheet_name="Vertices_Grilla")
             self.vertices = df.set_index(["Fila", "Columna"])
 
-            print(f"Modelo cargado: {len(self.vertices)} vértices.")
+          
 
         except FileNotFoundError:
             raise FileNotFoundError("El archivo del modelo no fue encontrado.")

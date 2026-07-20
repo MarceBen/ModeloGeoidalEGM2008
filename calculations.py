@@ -23,7 +23,7 @@ def calculate_orthometric_height(model, latitude, longitude, h):
 
     N = bilinear_interpolation(NA, NB, NC, ND, t, u)
 
-    orthometric_heigh = h - N
+    orthometric_height = h - N
 
     return {
         "Latitude": latitude,
@@ -44,7 +44,7 @@ def calculate_orthometric_height(model, latitude, longitude, h):
         "u": u,
 
         "Geoid_undulation": N,
-        "Orthometric_height": ortometric_heigh
+        "Orthometric_height": orthometric_height
 
 
     }
