@@ -1,39 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MODELO GEOIDAL EGM 2008-PERU</title>
+    <title>MODELO GEOIDAL EGM 2008 - PERÚ</title>
 </head>
+
 <body>
-    <h1>Ingrese las coordenadas geodésicas y la altura elipsoidal para calcular la altura ortométrica.</h1>
 
-    <div>  
-        <form method = "POST">
-            <label for = "Latitude">Introduzca la latitud en grados sexagesimales:</label>
-            <br>
+<h1>MODELO GEOIDAL EGM 2008 - PERÚ</h1>
 
-            <input type = "number" name = "Latitude" id = "Latitude" step = "any" required >
-            <br><br>
+<h3>Ingrese las coordenadas geodésicas y la altura elipsoidal para calcul\ar la altura ortométrica.</h3>
 
-            
+<form method="POST">
 
-            <label for="Longitude">Introduzca la longitud en grados sexagesimales:</label>
-            <br>
+    <label for="Latitude">Introduzca la latitud en grados sexagesimales:</label>
+    <br>
+    <input type="number" id="Latitude" name="Latitude" step="any" required>
 
-            <input type = "number" name = "Longitude" id = "Longitude" step = "any" required >
-            <br><br>
+    <br><br>
 
-            <label for="Height">Introduzca la altura elipsoidal en metros:</label>
-            <br>
+    <label for="Longitude">Introduzca la longitud en grados sexagesimales:</label>
+    <br>
+    <input type="number" id="Longitude" name="Longitude" step="any" required>
 
-            <input type = "number" name = "Height" id = "Height" step = "any" required >
-            <br><br>
+    <br><br>
 
-            <button type = "submit">Calcular</button>
-            
-        </form>
-    </div>
+    <label for="Height">Introduzca la altura elipsoidal (m):</label>
+    <br>
+    <input type="number" id="Height" name="Height" step="any" required>
+
+    <br><br>
+
+    <button type="submit">Calcular</button>
+
+</form>
 
 {% if result %}
 
@@ -41,90 +42,90 @@
 
 <h2>Datos de entrada</h2>
 
-<p>Latitud: {{ result["Latitude"] }}</p>
-<p>Longitud: {{ result["Longitude"] }}</p>
-<p>Altura elipsoidal: {{ result["Ellipsoidal Height"] }} m</p>
+<p><strong>Latitud:</strong> {{ "%.8f"|format(result["Latitude"]) }}</p>
+<p><strong>Longitud:</strong> {{ "%.8f"|format(result["Longitude"]) }}</p>
+<p><strong>Altura elipsoidal:</strong> {{ "%.3f"|format(result["Ellipsoidal Height"]) }} m</p>
 
 <hr>
 
 <h2>Ubicación del punto dentro de la grilla</h2>
 
-<p>
-El punto se encuentra entre las columnas
-<strong>{{ result["Truncated_index_i"] }}</strong> y
-<strong>{{ result["Truncated_index_i"] + 1 }}</strong>.
-</p>
+<p>El punto se encuentra entre las columnas {{ result["Truncated_index_i"] }} y {{ result["Truncated_index_i"] + 1 }}</p>
 
-<p>
-El punto se encuentra entre las filas
-<strong>{{ result["Truncated_index_j"] }}</strong> y
-<strong>{{ result["Truncated_index_j"] + 1 }}</strong>.
-</p>
+<p>El punto se encuentra entre las filas {{ result["Truncated_index_j"] }} y {{ result["Truncated_index_j"] + 1 }}</p>
 
 <hr>
 
-<h2>Índices calculados</h2>
+<h2>Índices</h2>
 
-<p>Índice i = {{ result["Index_i"] }}</p>
-<p>Índice j = {{ result["Index_j"] }}</p>
+<p><strong>i:</strong> {{ "%.6f"|format(result["Index_i"]) }}</p>
+
+<p><strong>j:</strong> {{ "%.6f"|format(result["Index_j"]) }}</p>
 
 <hr>
 
-<h2>Vértices utilizados para la interpolación</h2>
+<h2>Vertices Obtenidos Mediante los Indices</h2>
 
 <table border="1" cellpadding="6">
 
     <tr>
         <th>Vértice</th>
-        <th>Información</th>
+        <th>Latitud</th>
+        <th>Longitud</th>
+        <th>Ondulación (m)</th>
     </tr>
 
     <tr>
         <td>NA</td>
-        <td>{{ result["NA"] }}</td>
+        <td>{{ "%.6f"|format(result["NA"]["Latitud_deg"]) }}</td>
+        <td>{{ "%.6f"|format(result["NA"]["Longitud_deg"]) }}</td>
+        <td>{{ "%.6f"|format(result["NA"]["N_ondulacion_m"]) }}</td>
     </tr>
 
     <tr>
         <td>NB</td>
-        <td>{{ result["NB"] }}</td>
+        <td>{{ "%.6f"|format(result["NB"]["Latitud_deg"]) }}</td>
+        <td>{{ "%.6f"|format(result["NB"]["Longitud_deg"]) }}</td>
+        <td>{{ "%.6f"|format(result["NB"]["N_ondulacion_m"]) }}</td>
     </tr>
 
     <tr>
         <td>NC</td>
-        <td>{{ result["NC"] }}</td>
+        <td>{{ "%.6f"|format(result["NC"]["Latitud_deg"]) }}</td>
+        <td>{{ "%.6f"|format(result["NC"]["Longitud_deg"]) }}</td>
+        <td>{{ "%.6f"|format(result["NC"]["N_ondulacion_m"]) }}</td>
     </tr>
 
     <tr>
         <td>ND</td>
-        <td>{{ result["ND"] }}</td>
+        <td>{{ "%.6f"|format(result["ND"]["Latitud_deg"]) }}</td>
+        <td>{{ "%.6f"|format(result["ND"]["Longitud_deg"]) }}</td>
+        <td>{{ "%.6f"|format(result["ND"]["N_ondulacion_m"]) }}</td>
     </tr>
 
 </table>
 
-<hr>
-
 <h2>Parámetros de interpolación</h2>
 
-<p>t = {{ result["t"] }}</p>
-<p>u = {{ result["u"] }}</p>
+<p><strong>t:</strong> {{ "%.6f"|format(result["t"]) }}</p>
+
+<p><strong>u:</strong> {{ "%.6f"|format(result["u"]) }}</p>
 
 <hr>
 
 <h2>Resultados</h2>
 
 <p>
-<strong>Ondulación geoidal:</strong>
-{{ result["Geoid_undulation"] }} m
+<strong>Ondulación geoidal (N):</strong>
+{{ "%.6f"|format(result["Geoid_undulation"]) }} m
 </p>
 
 <p>
-<strong>Altura ortométrica:</strong>
-{{ result["Orthometric_height"] }} m
+<strong>Altura ortométrica (H):</strong>
+{{ "%.6f"|format(result["Orthometric_height"]) }} m
 </p>
 
 {% endif %}
 
- 
-    
 </body>
 </html>

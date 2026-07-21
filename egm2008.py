@@ -19,7 +19,6 @@ class EGModel2008: # CLASE QUE CARGA EL MODELO GEOIDAL
             self.vertices = df.set_index(["Fila", "Columna"])
 
           
-
         except FileNotFoundError:
             raise FileNotFoundError("El archivo del modelo no fue encontrado.")
 
@@ -35,13 +34,13 @@ class EGModel2008: # CLASE QUE CARGA EL MODELO GEOIDAL
 
         return i, j, i_trunc, j_trunc
     
-    def get_vertices(self, i, j):
+    def get_vertices(self, i_trunc, j_trunc):
         
         try:
-            NA = self.vertices.loc[(j, i)]
-            NB = self.vertices.loc[(j, i+1)]
-            NC = self.vertices.loc[(j+1, i+1)]
-            ND = self.vertices.loc[(j+1, i)]
+            NA = self.vertices.loc[(j_trunc, i_trunc)]
+            NB = self.vertices.loc[(j_trunc, i_trunc+1)]
+            NC = self.vertices.loc[(j_trunc+1, i_trunc+1)]
+            ND = self.vertices.loc[(j_trunc+1, i_trunc)]
         except KeyError:
             raise ValueError("El punto se encuentra fuera de los limites del modelo")
 

@@ -17,7 +17,7 @@ def calculate_orthometric_height(model, latitude, longitude, h):
     
     i, j, i_trunc, j_trunc = model.calculate_indices(latitude, longitude)
 
-    NA, NB, NC, ND = model.get_vertices(i, j)
+    NA, NB, NC, ND = model.get_vertices(i_trunc, j_trunc)
 
     t, u = model.calculate_tu(latitude, longitude, NA, NB, ND)
 
