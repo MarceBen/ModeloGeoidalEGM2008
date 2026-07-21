@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
     <title>MODELO GEOIDAL EGM 2008 - PERÚ</title>
 </head>
 
@@ -32,7 +35,9 @@
 
     <br><br>
 
-    <button type="submit">Calcular</button>
+    <button type="submit" class = "btn btn-primary">
+        Calcular
+    </button>
 
 </form>
 
@@ -126,6 +131,9 @@
 </p>
 
 {% endif %}
+
+
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
 
 </body>
 </html>
