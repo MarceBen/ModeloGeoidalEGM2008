@@ -7,6 +7,124 @@
 </head>
 <body>
     <h1>Ingrese las coordenadas geodésicas y la altura elipsoidal para calcular la altura ortométrica.</h1>
+
+    <div>  
+        <form method = "POST">
+            <label for = "Latitude">Introduzca la latitud en grados sexagesimales:</label>
+            <br>
+
+            <input type = "number" name = "Latitude" id = "Latitude" step = "any" required >
+            <br><br>
+
+            
+
+            <label for="Longitude">Introduzca la longitud en grados sexagesimales:</label>
+            <br>
+
+            <input type = "number" name = "Longitude" id = "Longitude" step = "any" required >
+            <br><br>
+
+            <label for="Height">Introduzca la altura elipsoidal en metros:</label>
+            <br>
+
+            <input type = "number" name = "Height" id = "Height" step = "any" required >
+            <br><br>
+
+            <button type = "submit">Calcular</button>
+            
+        </form>
+    </div>
+
+{% if result %}
+
+<hr>
+
+<h2>Datos de entrada</h2>
+
+<p>Latitud: {{ result["Latitude"] }}</p>
+<p>Longitud: {{ result["Longitude"] }}</p>
+<p>Altura elipsoidal: {{ result["Ellipsoidal Height"] }} m</p>
+
+<hr>
+
+<h2>Ubicación del punto dentro de la grilla</h2>
+
+<p>
+El punto se encuentra entre las columnas
+<strong>{{ result["Truncated_index_i"] }}</strong> y
+<strong>{{ result["Truncated_index_i"] + 1 }}</strong>.
+</p>
+
+<p>
+El punto se encuentra entre las filas
+<strong>{{ result["Truncated_index_j"] }}</strong> y
+<strong>{{ result["Truncated_index_j"] + 1 }}</strong>.
+</p>
+
+<hr>
+
+<h2>Índices calculados</h2>
+
+<p>Índice i = {{ result["Index_i"] }}</p>
+<p>Índice j = {{ result["Index_j"] }}</p>
+
+<hr>
+
+<h2>Vértices utilizados para la interpolación</h2>
+
+<table border="1" cellpadding="6">
+
+    <tr>
+        <th>Vértice</th>
+        <th>Información</th>
+    </tr>
+
+    <tr>
+        <td>NA</td>
+        <td>{{ result["NA"] }}</td>
+    </tr>
+
+    <tr>
+        <td>NB</td>
+        <td>{{ result["NB"] }}</td>
+    </tr>
+
+    <tr>
+        <td>NC</td>
+        <td>{{ result["NC"] }}</td>
+    </tr>
+
+    <tr>
+        <td>ND</td>
+        <td>{{ result["ND"] }}</td>
+    </tr>
+
+</table>
+
+<hr>
+
+<h2>Parámetros de interpolación</h2>
+
+<p>t = {{ result["t"] }}</p>
+<p>u = {{ result["u"] }}</p>
+
+<hr>
+
+<h2>Resultados</h2>
+
+<p>
+<strong>Ondulación geoidal:</strong>
+{{ result["Geoid_undulation"] }} m
+</p>
+
+<p>
+<strong>Altura ortométrica:</strong>
+{{ result["Orthometric_height"] }} m
+</p>
+
+{% endif %}
+
+ 
     
 </body>
 </html>
