@@ -29,7 +29,7 @@
                     </div>
             
             
-                    <p class = "mb-2"><strong>Ingrese las coordenadas geodésicas y la altura elipsoidal para calcular la altura ortométrica.</strong></p>
+                    <p class = " text-center mb-2"><strong>Ingrese las coordenadas geodésicas y la altura elipsoidal para calcular la altura ortométrica.</strong></p>
 
                     <form method="POST">
 
@@ -82,110 +82,275 @@
 
         </div>
 
+        {% if result %}
+
+    <div class = "container">
+
+        <div class = "row justify-content-center align-items-center h-100">
+
+            <div class = "col-6">
+
+                <div class = "card my-4">
+
+                    <h3 class = "card-header">
+                        Resultados Obtenidos
+                    </h3>
+
+                    <div class = "card-body">
+
+                        <p>
+                            <strong>Ondulación geoidal (N):</strong>
+                            {{ "%.6f"|format(result["Geoid_undulation"]) }} m
+                        </p>
+
+                        <p>
+                            <strong>Altura ortométrica (H):</strong>
+                            {{ "%.6f"|format(result["Orthometric_height"]) }} m
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    <div class = "container">
+
+        <div class = "row justify-content-center align-items-center h-100">
+
+            <div class = "col-6">
+
+                <div class = "card my-4">
+
+                    <h3 class = "text-center card-header">
+                        Datos de entrada
+                    </h3>
+
+                    <div class = "card-body">
+
+                        <p><strong>Latitud:</strong>
+                             {{ "%.8f"|format(result["Latitude"]) }}
+                        </p>
+
+                        <p><strong>Longitud:</strong>
+                             {{ "%.8f"|format(result["Longitude"]) }}
+                        </p>
+
+                        <p><strong>Altura elipsoidal:</strong>
+                             {{ "%.3f"|format(result["Ellipsoidal Height"]) }} m
+                        </p>
+
+                    
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
-     
+       <div class = "container">
 
-            {% if result %}
+        <div class = "row justify-content-center align-items-center h-100">
 
-            <hr>
+            <div class = "col-6">
 
-            <h2>Datos de entrada</h2>
+                <div class = "card my-4">
 
-            <p><strong>Latitud:</strong> {{ "%.8f"|format(result["Latitude"]) }}</p>
-            <p><strong>Longitud:</strong> {{ "%.8f"|format(result["Longitude"]) }}</p>
-            <p><strong>Altura elipsoidal:</strong> {{ "%.3f"|format(result["Ellipsoidal Height"]) }} m</p>
+                    <h3 class = "text-center card-header">
+                        Ubicación del punto dentro de la grilla
+                    </h3>
 
-            <hr>
+                    <div class = "card-body">
 
-            <h2>Ubicación del punto dentro de la grilla</h2>
+                        <p>
 
-            <p>El punto se encuentra entre las columnas {{ result["Truncated_index_i"] }} y {{ result["Truncated_index_i"] + 1 }}</p>
+                            El punto se encuentra entre las columnas {{ result["Truncated_index_i"] }} y {{ result["Truncated_index_i"] + 1 }}
 
-            <p>El punto se encuentra entre las filas {{ result["Truncated_index_j"] }} y {{ result["Truncated_index_j"] + 1 }}</p>
+                        </p>
 
-            <hr>
+                        <p>
+                            El punto se encuentra entre las filas {{ result["Truncated_index_j"] }} y {{ result["Truncated_index_j"] + 1 }}
+                        </p>
 
-            <h2>Índices</h2>
+                        <h3 class = "text-center card-title">
 
-            <p><strong>i:</strong> {{ "%.6f"|format(result["Index_i"]) }}</p>
+                            Índices Calculados
 
-            <p><strong>j:</strong> {{ "%.6f"|format(result["Index_j"]) }}</p>
+                        </h3>
 
-            <hr>
+                        <p><strong>i:</strong>
 
-            <h2>Vertices Obtenidos Mediante los Indices</h2>
+                             {{ "%.6f"|format(result["Index_i"]) }}
 
-            <table border="1" cellpadding="6">
+                        </p>
 
-                <tr>
-                    <th>Vértice</th>
-                    <th>Latitud</th>
-                    <th>Longitud</th>
-                    <th>Ondulación (m)</th>
-                </tr>
+                        <p><strong>j:</strong>
 
-                <tr>
-                    <td>NA</td>
-                    <td>{{ "%.6f"|format(result["NA"]["Latitud_deg"]) }}</td>
-                    <td>{{ "%.6f"|format(result["NA"]["Longitud_deg"]) }}</td>
-                    <td>{{ "%.6f"|format(result["NA"]["N_ondulacion_m"]) }}</td>
-                </tr>
+                             {{ "%.6f"|format(result["Index_j"]) }}
+                             
+                        </p>
 
-                <tr>
-                    <td>NB</td>
-                    <td>{{ "%.6f"|format(result["NB"]["Latitud_deg"]) }}</td>
-                    <td>{{ "%.6f"|format(result["NB"]["Longitud_deg"]) }}</td>
-                    <td>{{ "%.6f"|format(result["NB"]["N_ondulacion_m"]) }}</td>
-                </tr>
+                    
+                    </div>
 
-                <tr>
-                    <td>NC</td>
-                    <td>{{ "%.6f"|format(result["NC"]["Latitud_deg"]) }}</td>
-                    <td>{{ "%.6f"|format(result["NC"]["Longitud_deg"]) }}</td>
-                    <td>{{ "%.6f"|format(result["NC"]["N_ondulacion_m"]) }}</td>
-                </tr>
+                </div>
 
-                <tr>
-                    <td>ND</td>
-                    <td>{{ "%.6f"|format(result["ND"]["Latitud_deg"]) }}</td>
-                    <td>{{ "%.6f"|format(result["ND"]["Longitud_deg"]) }}</td>
-                    <td>{{ "%.6f"|format(result["ND"]["N_ondulacion_m"]) }}</td>
-                </tr>
+            </div>
 
-            </table>
+        </div>
 
-            <h2>Parámetros de interpolación</h2>
+    </div>
 
-            <p><strong>t:</strong> {{ "%.6f"|format(result["t"]) }}</p>
+    <div class = "container">
 
-            <p><strong>u:</strong> {{ "%.6f"|format(result["u"]) }}</p>
+        <div class = "row justify-content-center align-items-center h-100">
 
-            <hr>
+            <div class = "col-6">
 
-            <h2>Resultados</h2>
+                <div class = "card my-4">
 
-            <p>
-            <strong>Ondulación geoidal (N):</strong>
-            {{ "%.6f"|format(result["Geoid_undulation"]) }} m
-            </p>
+                     <h3 class = "card-header text-center">
 
-            <p>
-            <strong>Altura ortométrica (H):</strong>
-            {{ "%.6f"|format(result["Orthometric_height"]) }} m
-            </p>
+                        Vertices Obtenidos Mediante los Indices
 
-            {% endif %}
+                    </h3>
 
+                    <div class = "card-body">
+
+                        <table class = "table table-striped">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Vértice</th>
+
+                                    <th>Latitud</th>
+
+                                    <th>Longitud</th>
+
+                                    <th>Ondulación (m)</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>NA</td>
+
+                                    <td>{{ "%.6f"|format(result["NA"]["Latitud_deg"]) }}</td>
+
+                                    <td>{{ "%.6f"|format(result["NA"]["Longitud_deg"]) }}</td>
+
+                                    <td>{{ "%.6f"|format(result["NA"]["N_ondulacion_m"]) }}</td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>NB</td>
+
+                                    <td>{{ "%.6f"|format(result["NB"]["Latitud_deg"]) }}</td>
+
+                                    <td>{{ "%.6f"|format(result["NB"]["Longitud_deg"]) }}</td>
+
+                                    <td>{{ "%.6f"|format(result["NB"]["N_ondulacion_m"]) }}</td>
+
+                                </tr> 
+
+                                <tr>
+
+                                    <td>NC</td>
+
+                                    <td>{{ "%.6f"|format(result["NC"]["Latitud_deg"]) }}</td>
+
+                                    <td>{{ "%.6f"|format(result["NC"]["Longitud_deg"]) }}</td>
+
+                                    <td>{{ "%.6f"|format(result["NC"]["N_ondulacion_m"]) }}</td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>ND</td>
+
+                                    <td>{{ "%.6f"|format(result["ND"]["Latitud_deg"]) }}</td>
+
+                                    <td>{{ "%.6f"|format(result["ND"]["Longitud_deg"]) }}</td>
+
+                                    <td>{{ "%.6f"|format(result["ND"]["N_ondulacion_m"]) }}</td>
+
+                                </tr>
+
+                            </tbody>
 
             
+                        </table>
+
+                    </div>
+
+                    </div>
+
+               
+
+            </div>
+
+        </div>
+
+    </div>
+   
+
+    <div class = "container">
+
+        <div class = "row justify-content-center align-items-center h-100">
+
+            <div class = "col-6">
+
+                <div class = "card my-4">
+
+                    <h2 class = "card-header text-center">
+
+                        Parámetros de interpolación
+
+                    </h2>
+
+                    <div class = "card-body">
+
+                        <p><strong>t:</strong>
+                             {{ "%.6f"|format(result["t"]) }}
+                        </p>
+
+                        <p><strong>u:</strong>
+
+                             {{ "%.6f"|format(result["u"]) }}
+
+                        </p>
 
 
-        
+                    </div>
 
-    
+                </div>
 
-</div>
+            </div>
+
+            
+        </div>
+
+    </div>
+
+
+        {% endif %}
+
+
+
+    </div>
 
 
 
